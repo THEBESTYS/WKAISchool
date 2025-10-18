@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-eSports - World K-AI School</title>
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #ff4d94;
+            --accent-color: #00c2cb;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* 헤더 스타일 */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--light-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* 페이지 헤더 */
+        .page-header {
+            padding: 100px 0 50px;
+            text-align: center;
+            background: linear-gradient(rgba(26, 26, 46, 0.9), rgba(106, 13, 173, 0.7)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--light-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: var(--light-color);
+        }
+        
+        /* 콘텐츠 섹션 */
+        .content-section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--light-color);
+        }
+        
+        .section-title p {
+            color: #aaa;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .ai-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .feature-card {
+            background: linear-gradient(145deg, #22223a, #1a1a2e);
+            border-radius: 15px;
+            padding: 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(106, 13, 173, 0.3);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(106, 13, 173, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--light-color);
+        }
+        
+        .programs {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            padding: 60px 0;
+            border-radius: 20px;
+            margin-top: 40px;
+        }
+        
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .program-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s;
+        }
+        
+        .program-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .program-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--light-color);
+        }
+        
+        .program-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        /* 푸터 */
+        footer {
+            background-color: #0f0f1a;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--light-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://via.placeholder.com/150x50/6a0dad/ffffff?text=WKAISchool" alt="World K-AI School">
+                    <h1>World K-AI School</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">홈</a></li>
+                        <li><a href="k-edu.html">K-에듀</a></li>
+                        <li><a href="k-entertainment.html">K-엔터테인먼트</a></li>
+                        <li><a href="k-beauty.html">K-뷰티</a></li>
+                        <li><a href="k-food.html">K-푸드</a></li>
+                        <li><a href="k-esports.html">K-eSports</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 페이지 헤더 -->
+    <section class="page-header">
+        <div class="container">
+            <h1>K-eSports</h1>
+            <p>AI 코칭과 데이터 분석으로 e스포츠의 미래를 선도합니다</p>
+        </div>
+    </section>
+
+    <!-- 콘텐츠 섹션 -->
+    <section class="content-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>AI 기반 K-eSports 혁신</h2>
+                <p>한국의 e스포츠 강국 위상을 AI 기술과 결합하여 새로운 경쟁력을 창출합니다</p>
+            </div>
+            
+            <div class="ai-features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI 게임 코칭</h3>
+                    <p>실시간 게임 데이터 분석을 통해 개인별 맞춤형 전략과 피드백을 제공하는 AI 코치 시스템</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>전략 분석 AI</h3>
+                    <p>수천 건의 게임 데이터를 분석하여 최적의 전략과 픽밴 전략을 제안하는 AI 시스템</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </div>
+                    <h3>가상 훈련 시스템</h3>
+                    <p>AI가 생성한 다양한 시나리오와 상대 전략으로 실제 경기와 유사한 훈련 환경을 제공</p>
+                </div>
+            </div>
+            
+            <div class="programs">
+                <div class="section-title">
+                    <h2>K-eSports 프로그램</h2>
+                    <p>AI 기술을 활용한 다양한 e스포츠 프로그램을 통해 프로게이머의 꿈을 실현하세요</p>
+                </div>
+                
+                <div class="program-grid">
+                    <div class="program-card">
+                        <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="프로게이머 양성">
+                        <h3>프로게이머 양성</h3>
+                        <p>AI 코칭 시스템을 활용한 프로게이머 양성 프로그램</p>
+                    </div>
+                    <div class="program-card">
+                        <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="e스포츠 분석">
+                        <h3>e스포츠 데이터 분석</h3>
+                        <p>AI를 활용한 게임 데이터 분석과 전략 개발 전문가 양성 프로그램</p>
+                    </div>
+                    <div class="program-card">
+                        <img src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="e스포츠 마케팅">
+                        <h3>e스포츠 마케팅</h3>
+                        <p>AI 데이터 분석을 통한 e스포츠 팀 및 게임 마케팅 전략 수립</p>
+                    </div>
+                    <div class="program-card">
+                        <img src="https://images.unsplash.com/photo-1542751110-97427bbecf20?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="게임 개발">
+                        <h3>AI 게임 개발</h3>
+                        <p>AI 기술을 활용한 차세대 e스포츠 게임 개발 방법론</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>World K-AI School</h3>
+                    <p>K-컬쳐 글로벌 허브 비전 실현을 위한 실전 플랫폼</p>
+                </div>
+                <div class="footer-column">
+                    <h3>빠른 링크</h3>
+                    <ul>
+                        <li><a href="index.html">홈</a></li>
+                        <li><a href="k-edu.html">K-에듀</a></li>
+                        <li><a href="k-entertainment.html">K-엔터테인먼트</a></li>
+                        <li><a href="k-beauty.html">K-뷰티</a></li>
+                        <li><a href="k-food.html">K-푸드</a></li>
+                        <li><a href="k-esports.html">K-eSports</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>연락처</h3>
+                    <ul>
+                        <li>주소: 서울특별시 서대문구 연세로 50</li>
+                        <li>전화: 02-2123-1234</li>
+                        <li>이메일: info@wkaischool.kr</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 World K-AI School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
