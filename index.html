@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World K-AI School - K-컬쳐 글로벌 리더 양성 플랫폼</title>
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #ff4d94;
+            --accent-color: #00c2cb;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9fa;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark-color);
+            color: var(--light-color);
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* 헤더 스타일 */
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 15px;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(45deg, var(--secondary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--light-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary-color);
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        /* 히어로 섹션 */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(26, 26, 46, 0.8), rgba(106, 13, 173, 0.7)), url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 2;
+        }
+        
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(45deg, var(--light-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--light-color);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--secondary-color), var(--primary-color));
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 77, 148, 0.4);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 77, 148, 0.6);
+        }
+        
+        /* AI 특징 섹션 */
+        .ai-features {
+            padding: 80px 0;
+            background-color: rgba(26, 26, 46, 0.9);
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--light-color);
+        }
+        
+        .section-title p {
+            color: #aaa;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: linear-gradient(145deg, #22223a, #1a1a2e);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(106, 13, 173, 0.3);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(106, 13, 173, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--light-color);
+        }
+        
+        /* K-문화 섹션 */
+        .k-culture {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+        }
+        
+        .culture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .culture-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            backdrop-filter: blur(10px);
+        }
+        
+        .culture-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .culture-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .culture-card-content {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .culture-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--light-color);
+        }
+        
+        /* 파트너 섹션 */
+        .partners {
+            padding: 60px 0;
+            background-color: var(--dark-color);
+            text-align: center;
+        }
+        
+        .partner-logos {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .partner-logo {
+            height: 60px;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: filter 0.3s, opacity 0.3s;
+        }
+        
+        .partner-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        
+        /* 푸터 */
+        footer {
+            background-color: #0f0f1a;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: var(--light-color);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #777;
+            font-size: 0.9rem;
+        }
+        
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 5px 10px;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- 헤더 -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="https://via.placeholder.com/150x50/6a0dad/ffffff?text=WKAISchool" alt="World K-AI School">
+                    <h1>World K-AI School</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="index.html">홈</a></li>
+                        <li><a href="k-edu.html">K-에듀</a></li>
+                        <li><a href="k-entertainment.html">K-엔터테인먼트</a></li>
+                        <li><a href="k-beauty.html">K-뷰티</a></li>
+                        <li><a href="k-food.html">K-푸드</a></li>
+                        <li><a href="k-esports.html">K-eSports</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 히어로 섹션 -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>K-컬쳐 글로벌 허브 비전 실현을 위한 실전 플랫폼</h2>
+                <p>AI와 K-문화의 융복합을 통해 글로벌 리더를 양성하는 World K-AI School에 오신 것을 환영합니다.</p>
+                <a href="#ai-features" class="cta-button">더 알아보기</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI 특징 섹션 -->
+    <section class="ai-features" id="ai-features">
+        <div class="container">
+            <div class="section-title">
+                <h2>AI 기반 혁신 교육 플랫폼</h2>
+                <p>World K-AI School은 인공지능 기술을 활용하여 차별화된 K-문화 교육 경험을 제공합니다.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3>AI 트레이너</h3>
+                    <p>개인 맞춤형 피드백과 실시간 코칭을 제공하는 AI 트레이너가 여러분의 성장을 돕습니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>AI 커리큘럼</h3>
+                    <p>최신 트렌드와 학습 데이터를 분석하여 개인별 최적화된 커리큘럼을 자동 생성합니다.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>AI 콘텐츠 창작</h3>
+                    <p>생성형 AI를 활용하여 트렌디한 K-문화 콘텐츠를 제작하고 창작 과정을 지원합니다.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- K-문화 섹션 -->
+    <section class="k-culture">
+        <div class="container">
+            <div class="section-title">
+                <h2>융복합 K-문화 플랫폼</h2>
+                <p>다양한 K-문화 요소를 AI와 결합하여 새로운 경험을 제공합니다.</p>
+            </div>
+            <div class="culture-grid">
+                <div class="culture-card">
+                    <img src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="K-에듀">
+                    <div class="culture-card-content">
+                        <h3>K-에듀</h3>
+                        <p>AI 기반 맞춤형 K-문화 교육 프로그램</p>
+                    </div>
+                </div>
+                <div class="culture-card">
+                    <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="K-엔터테인먼트">
+                    <div class="culture-card-content">
+                        <h3>K-엔터테인먼트</h3>
+                        <p>K-Pop, K-Drama 등 엔터테인먼트 콘텐츠 제작</p>
+                    </div>
+                </div>
+                <div class="culture-card">
+                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="K-뷰티">
+                    <div class="culture-card-content">
+                        <h3>K-뷰티</h3>
+                        <p>AI가 분석하는 맞춤형 K-뷰티 트렌드</p>
+                    </div>
+                </div>
+                <div class="culture-card">
+                    <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=pb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="K-푸드">
+                    <div class="culture-card-content">
+                        <h3>K-푸드</h3>
+                        <p>한식의 현대적 해석과 AI 레시피 개발</p>
+                    </div>
+                </div>
+                <div class="culture-card">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="K-eSports">
+                    <div class="culture-card-content">
+                        <h3>K-eSports</h3>
+                        <p>AI 코칭을 통한 e스포츠 선수 양성</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 파트너 섹션 -->
+    <section class="partners">
+        <div class="container">
+            <div class="section-title">
+                <h2>함께 하는 파트너</h2>
+                <p>World K-AI School은 국내 최고의 기관들과 협력하여 최상의 교육 환경을 제공합니다.</p>
+            </div>
+            <div class="partner-logos">
+                <img src="https://via.placeholder.com/150x60/ffffff/6a0dad?text=Yonsei" alt="연세대학교" class="partner-logo">
+                <img src="https://via.placeholder.com/150x60/ffffff/6a0dad?text=Sejong" alt="세종학당재단" class="partner-logo">
+                <img src="https://via.placeholder.com/150x60/ffffff/6a0dad?text=EduFore" alt="에듀포레" class="partner-logo">
+                <img src="https://via.placeholder.com/150x60/ffffff/6a0dad?text=Chugye" alt="추계예술대학교" class="partner-logo">
+            </div>
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>World K-AI School</h3>
+                    <p>K-컬쳐 글로벌 허브 비전 실현을 위한 실전 플랫폼</p>
+                </div>
+                <div class="footer-column">
+                    <h3>빠른 링크</h3>
+                    <ul>
+                        <li><a href="index.html">홈</a></li>
+                        <li><a href="k-edu.html">K-에듀</a></li>
+                        <li><a href="k-entertainment.html">K-엔터테인먼트</a></li>
+                        <li><a href="k-beauty.html">K-뷰티</a></li>
+                        <li><a href="k-food.html">K-푸드</a></li>
+                        <li><a href="k-esports.html">K-eSports</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>연락처</h3>
+                    <ul>
+                        <li>주소: 서울특별시 서대문구 연세로 50</li>
+                        <li>전화: 02-2123-1234</li>
+                        <li>이메일: info@wkaischool.kr</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 World K-AI School. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 간단한 스크롤 애니메이션
+        document.addEventListener('DOMContentLoaded', function() {
+            const featureCards = document.querySelectorAll('.feature-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            featureCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
